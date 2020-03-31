@@ -1,20 +1,29 @@
+/*
+ * @Author: codesides
+ * @Descripttion:
+ * @Date: 2020-03-26 16:41:56
+ * @LastEditors: codesides
+ * @LastEditTime: 2020-03-31 15:57:08
+ * @FilePath: /RN/myApp/src/redux/store.js
+ */
 import {createStore, applyMiddleware, compose} from 'redux';
-// import {composeWithDevTools} from 'redux-devtools-extension';
+import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import reducer from './reducers';
 
-const middlewares = [thunk];
+const middlewares = [thunk, logger];
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(...middlewares)),
-);
-
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(
 //   reducer,
-//   composeWithDevTools(applyMiddleware(...middlewares)),
+//   composeEnhancers(applyMiddleware(...middlewares)),
 // );
+
+const store = createStore(
+  reducer,
+  composeWithDevTools(applyMiddleware(...middlewares)),
+);
 
 export default store;
 
